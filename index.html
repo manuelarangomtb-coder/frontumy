@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UmayuxLabs | Prototipando el Futuro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #020205; color: #f8fafc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .neon-glow { text-shadow: 0 0 10px rgba(168, 85, 247, 0.8), 0 0 20px rgba(59, 130, 246, 0.5); }
+        .glass { background: rgba(15, 15, 25, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .logo-ring { position: relative; }
+        .logo-ring::before {
+            content: ''; position: absolute; inset: -5px;
+            background: linear-gradient(45deg, #a855f7, #3b82f6, #10b981);
+            border-radius: 50%; z-index: -1; filter: blur(10px); opacity: 0.6;
+            animation: pulse 4s infinite alternate;
+        }
+        @keyframes pulse { 0% { opacity: 0.4; transform: scale(1); } 100% { opacity: 0.8; transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 p-6 flex justify-between items-center glass">
+        <div class="flex items-center gap-3">
+            <img src="logos/logo1.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-purple-500 shadow-lg">
+            <span class="mono font-bold tracking-tighter text-xl">Umayux<span class="text-purple-500">Labs</span></span>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm mono uppercase tracking-widest">
+            <a href="#" class="hover:text-purple-400 transition">Vibe Coding</a>
+            <a href="#" class="hover:text-cyan-400 transition">Agentes</a>
+            <a href="#" class="hover:text-green-400 transition">Impacto</a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+        <div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(#3b82f6 1px, transparent 1px); background-size: 40px 40px;"></div>
+        
+        <div class="z-10 text-center max-w-5xl">
+            <h2 class="mono text-cyan-400 text-sm md:text-base mb-4 tracking-[0.3em] uppercase">Umayux = Inteligente</h2>
+            <h1 class="text-5xl md:text-8xl font-black mb-6 leading-none">
+                EL FUTURO NO SE ESPERA, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-blue-500 to-green-400 neon-glow">
+                    SE PROTOTIPA.
+                </span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                Transformando ideas en soluciones con IA: <span class="text-white">Vibe Coding</span>, Agentes Autónomos y Software Disruptivo.
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-purple-500 hover:text-white transition-all duration-300 mono text-sm">
+                    INICIAR PROYECTO
+                </button>
+                <button class="border border-white/20 py-4 px-8 rounded-full hover:bg-white/10 transition-all mono text-sm">
+                    VER MANIFIESTO
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="glass p-8 rounded-2xl border-l-4 border-purple-500 shadow-2xl">
+                <div class="mono text-xs text-purple-400 mb-2 uppercase tracking-tighter">// Evolución del Desarrollo</div>
+                <h3 class="text-3xl font-bold mb-4">Del Código Tradicional al Vibe Coding</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Aprovechamos el poder de los últimos LLMs para implementar <span class="text-white italic">Spec-Driven Development</span>. En una sola reunión, pasamos del desafío al prototipo funcional.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="glass p-6 rounded-xl text-center">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">Salud</div>
+                    <p class="text-xs text-gray-500 mono">Diagnóstico & Ops</p>
+                </div>
+                <div class="glass p-6 rounded-xl text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-2">Agro</div>
+                    <p class="text-xs text-gray-500 mono">Sistemas Inteligentes</p>
+                </div>
+                <div class="glass p-6 rounded-xl text-center col-span-2 border-t border-cyan-500/30">
+                    <div class="text-2xl font-bold text-white mb-2 underline decoration-cyan-500">Agentes Autónomos</div>
+                    <p class="text-sm text-gray-400">Software que razona y optimiza procesos manuales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="contacto" class="py-24 px-6 bg-gradient-to-b from-transparent to-purple-900/20">
+        <div class="max-w-4xl mx-auto glass p-12 rounded-[2rem] text-center border-t-2 border-cyan-500/50">
+            <h2 class="mono text-cyan-400 mb-4 tracking-widest uppercase text-sm">Protocolo de Conexión</h2>
+            <h3 class="text-4xl md:text-6xl font-black mb-8">Hablemos de lo <span class="italic text-purple-400">que es real.</span></h3>
+            
+            <div class="flex flex-col items-center gap-6">
+                <a href="https://wa.me/573125574868" target="_blank" class="group flex items-center gap-4 bg-green-500 hover:bg-green-400 text-black font-bold py-5 px-10 rounded-2xl transition-all transform hover:scale-105">
+                    <span class="text-2xl">📞</span>
+                    <div class="text-left">
+                        <p class="text-[10px] uppercase mono leading-none opacity-70">WhatsApp Directo</p>
+                        <p class="text-xl">+57 312 557 4868</p>
+                    </div>
+                </a>
+                <p class="mono text-gray-500 text-sm italic mt-4">Disponible para consultoría en Salud, Educación y Agrotech.</p>
+            </div>
+        </div>
+    </section>
+<section class="py-24 px-6 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] z-0"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                
+                <div class="md:col-span-7">
+                    <h2 class="mono text-green-400 mb-6 tracking-widest uppercase text-xs flex items-center gap-2">
+                        <span class="w-8 h-[1px] bg-green-400"></span> 02. Filosofía Radical
+                    </h2>
+                    <h3 class="text-4xl md:text-5xl font-black mb-8 leading-tight">
+                        La IA sola no basta para <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
+                            transformar tu empresa.
+                        </span>
+                    </h3>
+                    <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                        No buscamos reemplazar mentes, sino <span class="text-white font-bold border-b-2 border-purple-500">expandir capacidades</span>. 
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        En la nueva revolución industrial, la ventaja competitiva no está en el algoritmo, sino en la **simbiosis entre el talento humano y la inteligencia autónoma**. Nosotros preparamos a tu equipo para liderar esta transición, convirtiendo el software estático en ecosistemas vivos.
+                    </p>
+                </div>
+
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="glass p-10 rounded-full w-64 h-64 flex flex-col justify-center items-center text-center border-dashed border-2 border-white/20 hover:border-purple-500/50 transition-all duration-700">
+                        <span class="text-5xl mb-2">🧠</span>
+                        <span class="mono text-[10px] uppercase tracking-tighter text-gray-400">ADN Umayux</span>
+                        <span class="text-xl font-bold mt-2">Humano + IA</span>
+                        <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent my-2"></div>
+                        <span class="text-[10px] mono text-purple-400">Revolución 5.0</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div id="vibe-chat" class="fixed bottom-6 right-6 z-[100] max-w-[320px] group">
+        <div class="absolute inset-0 bg-purple-600/20 blur-xl rounded-2xl group-hover:bg-cyan-600/30 transition-all duration-500"></div>
+        
+        <div class="relative glass p-5 rounded-2xl border-b-4 border-cyan-500 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center gap-2">
+                    <div class="relative">
+                        <div class="w-3 h-3 bg-green-500 rounded-full animate-ping absolute"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full relative"></div>
+                    </div>
+                    <span class="mono text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Umayux Agent v1.0</span>
+                </div>
+                <span class="text-[10px] text-gray-500 mono">ONLINE</span>
+            </div>
+
+            <div id="chat-text" class="text-sm leading-relaxed text-gray-200 mono mb-5 min-h-[60px]">
+                </div>
+
+            <a href="https://wa.me/573125574868" target="_blank" class="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 p-3 rounded-xl transition-all group/btn">
+                <div class="flex items-center gap-3">
+                    <div class="bg-green-500/20 p-2 rounded-lg group-hover/btn:bg-green-500/40 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </div>
+                    <span class="text-xs mono font-bold text-white tracking-tight">312 557 4868</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const chatText = "He analizado tu ecosistema. Estoy listo para prototipar tu solución en Salud o Agro mediante Vibe Coding. ¿Hablamos?";
+        const container = document.getElementById('chat-text');
+        let i = 0;
+
+        function typeEffect() {
+            if (i < chatText.length) {
+                container.innerHTML += chatText.charAt(i);
+                i++;
+                setTimeout(typeEffect, 35); // Un poco más rápido para fluidez
+            }
+        }
+
+        window.onload = typeEffect;
+    </script>
+
+    <script>
+        const chatText = "Hola. Mientras exploras, ya estoy analizando cómo optimizar tus procesos con Agentes Autónomos. ¿Hablamos?";
+        const container = document.getElementById('chat-text');
+        let i = 0;
+
+        function typeEffect() {
+            if (i < chatText.length) {
+                container.innerHTML += chatText.charAt(i);
+                i++;
+                setTimeout(typeEffect, 40);
+            }
+        }
+
+        // Iniciar efecto cuando cargue la página
+        window.onload = typeEffect;
+    </script>
+    <footer class="p-12 border-t border-white/10">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="mono text-xs text-gray-500 italic">
+                &gt; UmayuxLabs_System: Operando en tiempo real
+            </div>
+            <div class="flex gap-6">
+                <span class="text-gray-400 hover:text-white transition cursor-pointer">LinkedIn</span>
+                <span class="text-gray-400 hover:text-white transition cursor-pointer">GitHub</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
