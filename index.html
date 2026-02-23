@@ -177,17 +177,18 @@
 
         .glass-solid-nav {
             background-color: #0a0a12 !important;
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 450px;
-            /* Ancho fijo para mantener la estética de tus fotos */
-            max-width: calc(100vw - 40px);
-            /* Evita que se salga si la pantalla es pequeña */
+            width: 400px;
+            /* Un poco más angosta para mejor compatibilidad */
+            max-width: 85vw;
+            /* Clave para el celular */
             text-transform: none !important;
-            line-height: 1.6;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+            line-height: 1.5;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
             position: relative;
+            z-index: 100;
         }
 
         /* Estilo para las negrillas reales */
@@ -214,28 +215,81 @@
             /* Green-400 de Tailwind */
             font-weight: 700;
         }
+
+        @media (max-width: 768px) {
+            .glass-solid-nav {
+                width: 85vw !important;
+                /* La caja ocupará casi todo el ancho del celular */
+                position: fixed !important;
+                /* Se fija a la pantalla */
+                left: 50% !important;
+                transform: translateX(-50%) translateY(10px) !important;
+                top: 80px;
+                /* Se posiciona debajo de la nav */
+            }
+
+            /* Ocultamos el triángulo en móvil para evitar errores visuales */
+            .glass-solid-nav .absolute.bottom-full {
+                display: none;
+            }
+
+            /* Estilo para que el menú de la nav se pueda deslizar con el dedo */
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+
+        /* Navbar con color sólido y borde sutil */
+
+        .nav-solid {
+            background-color: #0a0a12 !important;
+            /* El mismo negro profundo de los menús */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: none !important;
+            /* Eliminamos la transparencia */
+        }
+
+        /* Ajuste para que el menú de móviles no se amontone */
+
+        @media (max-width: 768px) {
+            .nav-links-container {
+                display: flex;
+                gap: 1rem;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-links-container::-webkit-scrollbar {
+                display: none;
+                /* Oculta la barra de scroll en móviles */
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <nav class="fixed w-full z-50 p-6 flex justify-between items-center glass">
-        <div class="flex items-center gap-3">
+    <nav class="fixed w-full z-50 p-6 flex justify-between items-center nav-solid">
+        <div class="flex items-center gap-3 shrink-0">
             <img src="logos/logo1.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-purple-500 shadow-lg">
-            <span class="mono font-bold tracking-tighter text-xl">Umayux
+            <span class="mono font-bold tracking-tighter text-xl text-white">Umayux
                 <span class="text-purple-500">Labs</span>
             </span>
         </div>
 
-        <div class="hidden md:flex gap-8 text-sm mono uppercase tracking-widest items-center">
+        <div class="flex gap-4 md:gap-8 text-[10px] md:text-sm mono uppercase tracking-widest items-center">
+
             <div class="relative group">
                 <a href="#" class="hover:text-purple-400 transition cursor-help flex items-center gap-1">
                     Vibe Coding
                     <span class="text-[8px] opacity-50 text-purple-400">▼</span>
                 </a>
-
-                <div class="absolute top-full left-1/2 -translate-x-1/2 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[70]">
-                    <div class="glass-solid-nav no-caps">
+                <div class="absolute top-full left-1/2 -translate-x-1/2 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
+                    <div class="glass-solid-nav no-caps border-t-2 border-purple-500">
                         <p class="text-sm leading-relaxed text-gray-200">
                             En
                             <b>UmayuxLabs</b>, adoptamos el
@@ -244,93 +298,67 @@
                             para construir soluciones a una velocidad sin precedentes.
                             <br>
                             <br> 🛠️
-                            <b>Potenciamos al Senior:</b> Actúa como un exoesqueleto que libera su visión estratégica.
+                            <b>Potenciamos al Senior:</b> Exoesqueleto para visión estratégica.
                             <br> 📈
-                            <b>Aceleramos al Junior:</b> Impulsa un crecimiento exponencial en capacidad de entrega.
-                            <br>
-                            <br> ⚠️
-                            <b>El Riesgo:</b> Sin supervisión experta, la IA es un
-                            <b>Caballo de Troya</b> que genera deuda técnica e ineficiencia.
+                            <b>Aceleramos al Junior:</b> Crecimiento exponencial en entrega.
                             <br>
                             <br> ⚖️
-                            <b>Nuestra Diferencia:</b> En UmayuxLabs no solo "prompteamos". Aplicamos un
-                            <b>rigor técnico de hierro</b> para que la agilidad de la IA nunca comprometa la calidad, seguridad
-                            y escalabilidad de tu software.
+                            <b>Nuestra Diferencia:</b> Aplicamos un
+                            <b>rigor técnico de hierro</b> para que la agilidad de la IA nunca comprometa la calidad.
                         </p>
-                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 border-8 border-transparent border-b-[#a855f7]"></div>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 border-8 border-transparent border-b-purple-500"></div>
                     </div>
                 </div>
             </div>
 
             <div class="relative group">
-                <a href="#" class="hover:text-cyan-400 transition cursor-help flex items-center gap-1 uppercase">
+                <a href="#" class="hover:text-cyan-400 transition cursor-help flex items-center gap-1">
                     Agentes
                     <span class="text-[8px] opacity-50 text-cyan-400">▼</span>
                 </a>
-
-                <div class="absolute top-full right-[-50px] mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[70]">
+                <div class="absolute top-full left-1/2 -translate-x-1/2 md:right-[-50px] md:left-auto md:translate-x-0 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
                     <div class="glass-solid-nav no-caps border-t-2 border-cyan-500">
                         <p class="text-sm leading-relaxed text-gray-200">
                             En
                             <b>UmayuxLabs</b>, definimos a los
-                            <b>Agentes</b> como entidades de software con autonomía de ejecución. A diferencia de un chat convencional
-                            que solo responde, un Agente:
+                            <b>Agentes</b> como entidades de software con autonomía de ejecución. A diferencia de un chat convencional,
+                            un Agente:
                             <br>
                             <br> 🧠
-                            <b>Analiza:</b> Entiende un objetivo complejo (ej. "Crea una pasarela de pagos").
+                            <b>Analiza:</b> Entiende objetivos complejos.
                             <br> 🧩
-                            <b>Razona:</b> Desglosa el objetivo en subtareas lógicas.
+                            <b>Razona:</b> Desglosa tareas lógicas.
                             <br> 🚀
-                            <b>Actúa:</b> Escribe código, navega por la web y corrige sus propios errores en tiempo real.
-                            <br>
-                            <br>
-                            <b>El Rol en Nuestro Ecosistema</b>
-                            <br> Los Agentes son los motores del
-                            <b>Vibe Coding</b>. Permiten que un desarrollador actúe como un arquitecto de sistemas, supervisando
-                            a una fuerza laboral digital 24/7.
-                            <br>
-                            <br> 🛡️ Mantenemos el
-                            <b>Human-in-the-Loop:</b> cada decisión crítica es auditada para evitar alucinaciones y asegurar
-                            que la arquitectura sea robusta y segura.
+                            <b>Actúa:</b> Escribe código y corrige errores en tiempo real.
                         </p>
-                        <div class="absolute bottom-full right-[75px] border-8 border-transparent border-b-cyan-500"></div>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 md:left-auto md:right-[75px] border-8 border-transparent border-b-cyan-500"></div>
                     </div>
                 </div>
             </div>
+
             <div class="relative group">
-                <a href="#" class="hover:text-green-400 transition cursor-help flex items-center gap-1 uppercase">
+                <a href="#" class="hover:text-green-400 transition cursor-help flex items-center gap-1">
                     Impacto
                     <span class="text-[8px] opacity-50 text-green-400">▼</span>
                 </a>
-
-                <div class="absolute top-full right-[-20px] mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[70]">
+                <div class="absolute top-full left-1/2 -translate-x-1/2 md:right-[-20px] md:left-auto md:translate-x-0 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
                     <div class="glass-solid-nav no-caps border-t-2 border-green-500">
                         <div class="text-sm leading-relaxed text-gray-200">
-                            Transformamos la eficiencia técnica en ventajas competitivas reales. Con nuestro enfoque de
+                            Transformamos la eficiencia técnica en ventajas competitivas reales. Con
                             <b>Vibe Coding + Agentes</b>, redefinimos la economía del software:
                             <br>
                             <br>
-                            <b>Talento Humano Aumentado:</b> Elevamos a los desarrolladores de "escritores de código" a arquitectos
-                            estratégicos, enfocados en resolver tus problemas de negocio, no en tareas mecánicas.
+                            <b>Talento Aumentado:</b> Desarrolladores como arquitectos estratégicos.
                             <br>
+                            <b>Velocidad Radical:</b> Prototipos en días, no meses.
                             <br>
-                            <b>Velocidad Radical (Time-to-Market):</b> Lo que antes tomaba meses, hoy se prototipa en días.
-                            Lanzamos features y ajustes al mercado antes que tu competencia termine de planificarlos.
-                            <br>
-                            <br>
-                            <b>Eficiencia 10x:</b> Rompemos la barrera del costo tradicional. Con el mismo presupuesto, entregamos
-                            hasta 10 veces más valor, eliminando el desperdicio operativo y maximizando tu inversión.
-                            <br>
-                            <br>
-                            <b>Agilidad Competitiva:</b> Iteramos, fallamos y corregimos a la velocidad del pensamiento, permitiéndote
-                            liderar tu sector con software robusto y evolutivo.
-                            <br>
-                            <br> En
-                            <b>UmayuxLabs</b>, no solo hacemos software; aceleramos tu capacidad de innovar.</div>
-                        <div class="absolute bottom-full right-[45px] border-8 border-transparent border-b-green-500"></div>
+                            <b>Eficiencia 10x:</b> Hasta 10 veces más valor con el mismo presupuesto.
+                        </div>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 md:left-auto md:right-[45px] border-8 border-transparent border-b-green-500"></div>
                     </div>
                 </div>
             </div>
+
         </div>
     </nav>
     <section class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20">
@@ -501,35 +529,28 @@
     </div>
 
     <script>
-        const chatText = "He analizado tu ecosistema. Estoy listo para prototipar tu solución usando Vibe Coding o SDD. ¿Hablamos?";
-        const container = document.getElementById('chat-text');
-        let i = 0;
+        // Único script de efecto de escritura para el chat
+        const chatMessage = "He analizado tu ecosistema. Estoy listo para prototipar tu solución usando Vibe Coding o SDD. ¿Hablamos?";
+        const chatContainer = document.getElementById('chat-text');
+        let charIndex = 0;
 
         function typeEffect() {
-            if (i < chatText.length) {
-                container.innerHTML += chatText.charAt(i);
-                i++;
-                setTimeout(typeEffect, 35); // Un poco más rápido para fluidez
+            if (charIndex < chatMessage.length) {
+                chatContainer.innerHTML += chatMessage.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 35);
             }
         }
 
-        window.onload = typeEffect;
-    </script>
+        // Efecto de brillo del mouse en tarjetas
+        document.querySelectorAll('.glass').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
 
-    <script>
-        const chatTexts = "Hola. Mientras exploras, ya estoy analizando cómo optimizar tus procesos con Agentes Autónomos. ¿Hablamos?";
-        const container = document.getElementById('chat-texts');
-        let i = 0;
-
-        function typeEffect() {
-            if (i < chatText.length) {
-                container.innerHTML += chatText.charAt(i);
-                i++;
-                setTimeout(typeEffect, 40);
-            }
-        }
-
-        // Iniciar efecto cuando cargue la página
         window.onload = typeEffect;
     </script>
     <footer class="p-12 border-t border-white/10">
