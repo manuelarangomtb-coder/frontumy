@@ -217,30 +217,45 @@
         }
 
         @media (max-width: 768px) {
+            /* Forzamos que el popover se posicione respecto a la pantalla, no al menú */
             .glass-solid-nav {
-                width: 85vw !important;
-                /* La caja ocupará casi todo el ancho del celular */
+                width: 90vw !important;
+                /* Casi todo el ancho del celular */
+                max-width: none !important;
                 position: fixed !important;
-                /* Se fija a la pantalla */
+                /* Posición fija para que no dependa del botón */
                 left: 50% !important;
-                transform: translateX(-50%) translateY(10px) !important;
-                top: 80px;
-                /* Se posiciona debajo de la nav */
+                right: auto !important;
+                /* Cancelamos cualquier ajuste a la derecha */
+                transform: translateX(-50%) !important;
+                top: 85px !important;
+                /* Justo debajo de la navbar */
+                z-index: 1000 !important;
             }
 
-            /* Ocultamos el triángulo en móvil para evitar errores visuales */
-            .glass-solid-nav .absolute.bottom-full {
-                display: none;
+            /* Ocultamos la flechita en móvil porque ya no apunta al botón */
+            .glass-solid-nav div[class*="absolute bottom-full"] {
+                display: none !important;
             }
+        }
 
-            /* Estilo para que el menú de la nav se pueda deslizar con el dedo */
-            .no-scrollbar::-webkit-scrollbar {
-                display: none;
-            }
-            .no-scrollbar {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
+        /* Ocultamos el triángulo en móvil para evitar errores visuales */
+
+        .glass-solid-nav .absolute.bottom-full {
+            display: none;
+        }
+
+        /* Estilo para que el menú de la nav se pueda deslizar con el dedo */
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         }
 
         /* Navbar con color sólido y borde sutil */
@@ -316,7 +331,7 @@
                     Agentes
                     <span class="text-[8px] opacity-50 text-cyan-400">▼</span>
                 </a>
-                <div class="absolute top-full left-1/2 -translate-x-1/2 md:right-[-50px] md:left-auto md:translate-x-0 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
+                <div class="absolute top-full left-1/2 -translate-x-1/2 md:left-auto md:right-[-50px] md:translate-x-0 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
                     <div class="glass-solid-nav no-caps border-t-2 border-cyan-500">
                         <p class="text-sm leading-relaxed text-gray-200">
                             En
@@ -341,7 +356,7 @@
                     Impacto
                     <span class="text-[8px] opacity-50 text-green-400">▼</span>
                 </a>
-                <div class="absolute top-full left-1/2 -translate-x-1/2 md:right-[-20px] md:left-auto md:translate-x-0 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
+                <div class="absolute top-full left-1/2 -translate-x-1/2 md:left-auto md:right-[-20px] md:translate-x-0 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
                     <div class="glass-solid-nav no-caps border-t-2 border-green-500">
                         <div class="text-sm leading-relaxed text-gray-200">
                             Transformamos la eficiencia técnica en ventajas competitivas reales. Con
@@ -418,7 +433,7 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div class="glass p-6 rounded-xl text-center">
-                    <div class="text-3xl font-bold text-blue-400 mb-2">Evolución Inmediata</div>
+                    <div class="text-3xl font-bold text-blue-400 mb-2">Evolución Instantánea</div>
                     <p class="text-xs text-gray-500 mono">Software Generativo</p>
                 </div>
                 <div class="glass p-6 rounded-xl text-center">
