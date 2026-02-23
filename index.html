@@ -1,62 +1,379 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UmayuxLabs | Prototipando el Futuro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;900&display=swap"
+        rel="stylesheet">
     <style>
-        body { background-color: #020205; color: #f8fafc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        .neon-glow { text-shadow: 0 0 10px rgba(168, 85, 247, 0.8), 0 0 20px rgba(59, 130, 246, 0.5); }
-        .glass { background: rgba(15, 15, 25, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .logo-ring { position: relative; }
+        body {
+            background-color: #020205;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.8), 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .glass {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-ring {
+            position: relative;
+        }
+
         .logo-ring::before {
-            content: ''; position: absolute; inset: -5px;
+            content: '';
+            position: absolute;
+            inset: -5px;
             background: linear-gradient(45deg, #a855f7, #3b82f6, #10b981);
-            border-radius: 50%; z-index: -1; filter: blur(10px); opacity: 0.6;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.6;
             animation: pulse 4s infinite alternate;
         }
-        @keyframes pulse { 0% { opacity: 0.4; transform: scale(1); } 100% { opacity: 0.8; transform: scale(1.05); } }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .glass {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(168, 85, 247, 0.1);
+        }
+
+        /* El resplandor que sigue al mouse */
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient( 400px circle at var(--mouse-x) var(--mouse-y),
+            rgba(168, 85, 247, 0.15),
+            transparent 40%);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .glass:hover::before {
+            opacity: 1;
+        }
+
+        .glass:hover h3 {
+            animation: glitch 0.3s ease;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0 red, -2px 0 blue;
+                transform: translate(0);
+            }
+            20% {
+                text-shadow: -2px 0 red, 2px 0 blue;
+                transform: translate(-1px, 1px);
+            }
+            40% {
+                text-shadow: 2px 0 blue, -2px 0 red;
+                transform: translate(-1px, -1px);
+            }
+            100% {
+                text-shadow: none;
+                transform: translate(0);
+            }
+        }
+
+        /* Animación del cohete despegando */
+
+        @keyframes launch {
+            0% {
+                transform: translateY(0) scale(1);
+                filter: drop-shadow(0 0 0px transparent);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.1);
+                filter: drop-shadow(0 10px 10px rgba(168, 85, 247, 0.5));
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                filter: drop-shadow(0 0 0px transparent);
+            }
+        }
+
+        .group:hover .rocket-launch {
+            animation: launch 1.5s infinite ease-in-out;
+        }
+
+
+        /* Efecto de resplandor para el popover */
+
+        .glass {
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.1);
+        }
+
+        /* Clase para fondos que deben ser legibles */
+
+        .glass-solid {
+            background: #0a0a12 !important;
+            /* Negro profundo sólido */
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Animación del cohete */
+
+        @keyframes launch {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-15px) scale(1.1);
+                filter: drop-shadow(0 15px 10px rgba(168, 85, 247, 0.6));
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .rocket-launch {
+            display: inline-block;
+            filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
+        }
+
+        .glass-solid b,
+        .glass-solid strong {
+            color: #a855f7;
+            /* Púrpura Umayux */
+            font-weight: 700;
+        }
+
+        /* Caja sólida mejorada */
+
+        .glass-solid-nav {
+            background-color: #0a0a12 !important;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 450px;
+            /* Ancho fijo para mantener la estética de tus fotos */
+            max-width: calc(100vw - 40px);
+            /* Evita que se salga si la pantalla es pequeña */
+            text-transform: none !important;
+            line-height: 1.6;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+
+        /* Estilo para las negrillas reales */
+
+        .glass-solid-nav b {
+            color: #a855f7;
+            font-weight: 700;
+        }
+
+        /* Quitar mayúsculas automáticas si Tailwind las pone */
+
+        .no-caps {
+            text-transform: none !important;
+            letter-spacing: normal !important;
+        }
+
+        .group:hover a[class*="text-cyan-400"]+div b {
+            color: #22d3ee;
+            /* Color cian-400 */
+        }
+
+        .group:hover a[class*="text-green-400"]+div b {
+            color: #4ade80;
+            /* Green-400 de Tailwind */
+            font-weight: 700;
+        }
     </style>
 </head>
+
 <body>
 
     <nav class="fixed w-full z-50 p-6 flex justify-between items-center glass">
         <div class="flex items-center gap-3">
             <img src="logos/logo1.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-purple-500 shadow-lg">
-            <span class="mono font-bold tracking-tighter text-xl">Umayux<span class="text-purple-500">Labs</span></span>
+            <span class="mono font-bold tracking-tighter text-xl">Umayux
+                <span class="text-purple-500">Labs</span>
+            </span>
         </div>
-        <div class="hidden md:flex gap-8 text-sm mono uppercase tracking-widest">
-            <a href="#" class="hover:text-purple-400 transition">Vibe Coding</a>
-            <a href="#" class="hover:text-cyan-400 transition">Agentes</a>
-            <a href="#" class="hover:text-green-400 transition">Impacto</a>
+
+        <div class="hidden md:flex gap-8 text-sm mono uppercase tracking-widest items-center">
+            <div class="relative group">
+                <a href="#" class="hover:text-purple-400 transition cursor-help flex items-center gap-1">
+                    Vibe Coding
+                    <span class="text-[8px] opacity-50 text-purple-400">▼</span>
+                </a>
+
+                <div class="absolute top-full left-1/2 -translate-x-1/2 mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[70]">
+                    <div class="glass-solid-nav no-caps">
+                        <p class="text-sm leading-relaxed text-gray-200">
+                            En
+                            <b>UmayuxLabs</b>, adoptamos el
+                            <b>Vibe Coding</b> como un
+                            <b>multiplicador de impacto</b>. 🚀 No solo escribimos código; dirigimos inteligencia artificial
+                            para construir soluciones a una velocidad sin precedentes.
+                            <br>
+                            <br> 🛠️
+                            <b>Potenciamos al Senior:</b> Actúa como un exoesqueleto que libera su visión estratégica.
+                            <br> 📈
+                            <b>Aceleramos al Junior:</b> Impulsa un crecimiento exponencial en capacidad de entrega.
+                            <br>
+                            <br> ⚠️
+                            <b>El Riesgo:</b> Sin supervisión experta, la IA es un
+                            <b>Caballo de Troya</b> que genera deuda técnica e ineficiencia.
+                            <br>
+                            <br> ⚖️
+                            <b>Nuestra Diferencia:</b> En UmayuxLabs no solo "prompteamos". Aplicamos un
+                            <b>rigor técnico de hierro</b> para que la agilidad de la IA nunca comprometa la calidad, seguridad
+                            y escalabilidad de tu software.
+                        </p>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 border-8 border-transparent border-b-[#a855f7]"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative group">
+                <a href="#" class="hover:text-cyan-400 transition cursor-help flex items-center gap-1 uppercase">
+                    Agentes
+                    <span class="text-[8px] opacity-50 text-cyan-400">▼</span>
+                </a>
+
+                <div class="absolute top-full right-[-50px] mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[70]">
+                    <div class="glass-solid-nav no-caps border-t-2 border-cyan-500">
+                        <p class="text-sm leading-relaxed text-gray-200">
+                            En
+                            <b>UmayuxLabs</b>, definimos a los
+                            <b>Agentes</b> como entidades de software con autonomía de ejecución. A diferencia de un chat convencional
+                            que solo responde, un Agente:
+                            <br>
+                            <br> 🧠
+                            <b>Analiza:</b> Entiende un objetivo complejo (ej. "Crea una pasarela de pagos").
+                            <br> 🧩
+                            <b>Razona:</b> Desglosa el objetivo en subtareas lógicas.
+                            <br> 🚀
+                            <b>Actúa:</b> Escribe código, navega por la web y corrige sus propios errores en tiempo real.
+                            <br>
+                            <br>
+                            <b>El Rol en Nuestro Ecosistema</b>
+                            <br> Los Agentes son los motores del
+                            <b>Vibe Coding</b>. Permiten que un desarrollador actúe como un arquitecto de sistemas, supervisando
+                            a una fuerza laboral digital 24/7.
+                            <br>
+                            <br> 🛡️ Mantenemos el
+                            <b>Human-in-the-Loop:</b> cada decisión crítica es auditada para evitar alucinaciones y asegurar
+                            que la arquitectura sea robusta y segura.
+                        </p>
+                        <div class="absolute bottom-full right-[75px] border-8 border-transparent border-b-cyan-500"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
+                <a href="#" class="hover:text-green-400 transition cursor-help flex items-center gap-1 uppercase">
+                    Impacto
+                    <span class="text-[8px] opacity-50 text-green-400">▼</span>
+                </a>
+
+                <div class="absolute top-full right-[-20px] mt-4 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-[70]">
+                    <div class="glass-solid-nav no-caps border-t-2 border-green-500">
+                        <div class="text-sm leading-relaxed text-gray-200">
+                            Transformamos la eficiencia técnica en ventajas competitivas reales. Con nuestro enfoque de
+                            <b>Vibe Coding + Agentes</b>, redefinimos la economía del software:
+                            <br>
+                            <br>
+                            <b>Talento Humano Aumentado:</b> Elevamos a los desarrolladores de "escritores de código" a arquitectos
+                            estratégicos, enfocados en resolver tus problemas de negocio, no en tareas mecánicas.
+                            <br>
+                            <br>
+                            <b>Velocidad Radical (Time-to-Market):</b> Lo que antes tomaba meses, hoy se prototipa en días.
+                            Lanzamos features y ajustes al mercado antes que tu competencia termine de planificarlos.
+                            <br>
+                            <br>
+                            <b>Eficiencia 10x:</b> Rompemos la barrera del costo tradicional. Con el mismo presupuesto, entregamos
+                            hasta 10 veces más valor, eliminando el desperdicio operativo y maximizando tu inversión.
+                            <br>
+                            <br>
+                            <b>Agilidad Competitiva:</b> Iteramos, fallamos y corregimos a la velocidad del pensamiento, permitiéndote
+                            liderar tu sector con software robusto y evolutivo.
+                            <br>
+                            <br> En
+                            <b>UmayuxLabs</b>, no solo hacemos software; aceleramos tu capacidad de innovar.</div>
+                        <div class="absolute bottom-full right-[45px] border-8 border-transparent border-b-green-500"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
-
     <section class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20">
         <div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(#3b82f6 1px, transparent 1px); background-size: 40px 40px;"></div>
-        
+
         <div class="z-10 text-center max-w-5xl">
             <h2 class="mono text-cyan-400 text-sm md:text-base mb-4 tracking-[0.3em] uppercase">Umayux = Inteligente</h2>
             <h1 class="text-5xl md:text-8xl font-black mb-6 leading-none">
-                EL FUTURO NO SE ESPERA, <br>
+                EL FUTURO NO SE ESPERA,
+                <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-blue-500 to-green-400 neon-glow">
                     SE PROTOTIPA.
                 </span>
             </h1>
             <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-                Transformando ideas en soluciones con IA: <span class="text-white">Vibe Coding</span>, Agentes Autónomos y Software Disruptivo.
+                Transformando ideas en soluciones con IA:
+                <span class="text-white">Vibe Coding</span>, Agentes Autónomos y Software Disruptivo. Ayudamos a que tu equipo se potencie con IA
             </p>
-            
+
             <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <button class="bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-purple-500 hover:text-white transition-all duration-300 mono text-sm">
-                    INICIAR PROYECTO
-                </button>
-                <button class="border border-white/20 py-4 px-8 rounded-full hover:bg-white/10 transition-all mono text-sm">
-                    VER MANIFIESTO
-                </button>
+                <div class="relative inline-block group">
+                    <button class="bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-purple-500 hover:text-white transition-all duration-300 mono text-sm w-full md:w-auto">
+                        INICIAR PROYECTO
+                    </button>
+
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-80 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-500 z-[60]">
+                        <div class="glass-solid p-6 rounded-2xl">
+                            <div class="flex justify-center mb-4 text-5xl rocket-launch">🚀</div>
+
+                            <h4 class="mono text-[11px] text-cyan-400 mb-3 uppercase tracking-[0.2em] text-center font-bold">
+                                Estrategia de Crecimiento Exponencial
+                            </h4>
+
+                            <p class="text-sm leading-relaxed text-gray-100 text-center font-medium">
+                                "La IA es el catalizador de la nueva ventaja competitiva. No se trata solo de generar código, sino de orquestar arquitecturas
+                                inteligentes a velocidades sin precedentes. Permítanos mostrarle cómo liderar su sector."
+                            </p>
+
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#0a0a12]"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -67,17 +384,18 @@
                 <div class="mono text-xs text-purple-400 mb-2 uppercase tracking-tighter">// Evolución del Desarrollo</div>
                 <h3 class="text-3xl font-bold mb-4">Del Código Tradicional al Vibe Coding</h3>
                 <p class="text-gray-400 leading-relaxed">
-                    Aprovechamos el poder de los últimos LLMs para implementar <span class="text-white italic">Spec-Driven Development</span>. En una sola reunión, pasamos del desafío al prototipo funcional.
+                    Aprovechamos el poder de los últimos LLMs para implementar
+                    <span class="text-white italic">Spec-Driven Development</span>. En una sola reunión, pasamos del desafío al prototipo funcional.
                 </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div class="glass p-6 rounded-xl text-center">
-                    <div class="text-3xl font-bold text-blue-400 mb-2">Salud</div>
-                    <p class="text-xs text-gray-500 mono">Diagnóstico & Ops</p>
+                    <div class="text-3xl font-bold text-blue-400 mb-2">Evolución Instantánea</div>
+                    <p class="text-xs text-gray-500 mono">Software Generativo</p>
                 </div>
                 <div class="glass p-6 rounded-xl text-center">
-                    <div class="text-3xl font-bold text-green-400 mb-2">Agro</div>
-                    <p class="text-xs text-gray-500 mono">Sistemas Inteligentes</p>
+                    <div class="text-3xl font-bold text-green-400 mb-2">Génesis 10x</div>
+                    <p class="text-xs text-gray-500 mono">Nacimiento Ágil</p>
                 </div>
                 <div class="glass p-6 rounded-xl text-center col-span-2 border-t border-cyan-500/30">
                     <div class="text-2xl font-bold text-white mb-2 underline decoration-cyan-500">Agentes Autónomos</div>
@@ -86,11 +404,13 @@
             </div>
         </div>
     </section>
-<section id="contacto" class="py-24 px-6 bg-gradient-to-b from-transparent to-purple-900/20">
+    <section id="contacto" class="py-24 px-6 bg-gradient-to-b from-transparent to-purple-900/20">
         <div class="max-w-4xl mx-auto glass p-12 rounded-[2rem] text-center border-t-2 border-cyan-500/50">
             <h2 class="mono text-cyan-400 mb-4 tracking-widest uppercase text-sm">Protocolo de Conexión</h2>
-            <h3 class="text-4xl md:text-6xl font-black mb-8">Hablemos de lo <span class="italic text-purple-400">que es real.</span></h3>
-            
+            <h3 class="text-4xl md:text-6xl font-black mb-8">Hablemos de lo
+                <span class="italic text-purple-400">que es real.</span>
+            </h3>
+
             <div class="flex flex-col items-center gap-6">
                 <a href="https://wa.me/573125574868" target="_blank" class="group flex items-center gap-4 bg-green-500 hover:bg-green-400 text-black font-bold py-5 px-10 rounded-2xl transition-all transform hover:scale-105">
                     <span class="text-2xl">📞</span>
@@ -99,31 +419,35 @@
                         <p class="text-xl">+57 312 557 4868</p>
                     </div>
                 </a>
-                <p class="mono text-gray-500 text-sm italic mt-4">Disponible para consultoría en Salud, Educación y Agrotech.</p>
+                <p class="mono text-gray-500 text-sm italic mt-4">Arquitectos de Génesis Digital: Llevamos tu negocio al siguiente nivel con Agentes e IA.</p>
             </div>
         </div>
     </section>
-<section class="py-24 px-6 relative overflow-hidden">
+    <section class="py-24 px-6 relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] z-0"></div>
 
         <div class="max-w-5xl mx-auto relative z-10">
             <div class="grid md:grid-cols-12 gap-8 items-center">
-                
+
                 <div class="md:col-span-7">
                     <h2 class="mono text-green-400 mb-6 tracking-widest uppercase text-xs flex items-center gap-2">
                         <span class="w-8 h-[1px] bg-green-400"></span> 02. Filosofía Radical
                     </h2>
                     <h3 class="text-4xl md:text-5xl font-black mb-8 leading-tight">
-                        La IA sola no basta para <br>
+                        La IA sola no basta para
+                        <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
                             transformar tu empresa.
                         </span>
                     </h3>
                     <p class="text-xl text-gray-300 leading-relaxed mb-6">
-                        No buscamos reemplazar mentes, sino <span class="text-white font-bold border-b-2 border-purple-500">expandir capacidades</span>. 
+                        No buscamos reemplazar mentes, sino
+                        <span class="text-white font-bold border-b-2 border-purple-500">expandir capacidades</span>.
                     </p>
                     <p class="text-gray-400 leading-relaxed">
-                        En la nueva revolución industrial, la ventaja competitiva no está en el algoritmo, sino en la **simbiosis entre el talento humano y la inteligencia autónoma**. Nosotros preparamos a tu equipo para liderar esta transición, convirtiendo el software estático en ecosistemas vivos.
+                        En la nueva revolución industrial, la ventaja competitiva no está en el algoritmo, sino en la
+                        <b>simbiosis entre el talento humano y la inteligencia autónoma</b>. Nosotros preparamos a tu equipo
+                        para liderar esta transición, convirtiendo el software estático en ecosistemas vivos.
                     </p>
                 </div>
 
@@ -140,10 +464,8 @@
             </div>
         </div>
     </section>
-    <div id="vibe-chat" class="fixed bottom-6 right-6 z-[100] max-w-[320px] group">
-        <div class="absolute inset-0 bg-purple-600/20 blur-xl rounded-2xl group-hover:bg-cyan-600/30 transition-all duration-500"></div>
-        
-        <div class="relative glass p-5 rounded-2xl border-b-4 border-cyan-500 shadow-2xl">
+    <div id="vibe-chat" class="fixed bottom-6 right-6 z-[100] group flex flex-col items-end">
+        <div class="relative glass-solid p-5 rounded-2xl border-b-4 border-cyan-500 shadow-2xl opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-500 mb-4 max-w-[320px]">
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center gap-2">
                     <div class="relative">
@@ -155,23 +477,31 @@
                 <span class="text-[10px] text-gray-500 mono">ONLINE</span>
             </div>
 
-            <div id="chat-text" class="text-sm leading-relaxed text-gray-200 mono mb-5 min-h-[60px]">
-                </div>
+            <div id="chat-text" class="text-sm leading-relaxed text-gray-200 mono mb-5 min-h-[60px]"></div>
 
             <a href="https://wa.me/573125574868" target="_blank" class="flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 p-3 rounded-xl transition-all group/btn">
                 <div class="flex items-center gap-3">
                     <div class="bg-green-500/20 p-2 rounded-lg group-hover/btn:bg-green-500/40 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
                     </div>
                     <span class="text-xs mono font-bold text-white tracking-tight">312 557 4868</span>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
             </a>
+        </div>
+
+        <div class="w-16 h-16 glass rounded-full flex items-center justify-center cursor-pointer border-purple-500/50 hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="text-purple-400 group-hover:text-cyan-400 transition-colors">
+                <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path>
+            </svg>
         </div>
     </div>
 
     <script>
-        const chatText = "He analizado tu ecosistema. Estoy listo para prototipar tu solución en Salud o Agro mediante Vibe Coding. ¿Hablamos?";
+        const chatText = "He analizado tu ecosistema. Estoy listo para prototipar tu solución usando Vibe Coding o SDD. ¿Hablamos?";
         const container = document.getElementById('chat-text');
         let i = 0;
 
@@ -187,8 +517,8 @@
     </script>
 
     <script>
-        const chatText = "Hola. Mientras exploras, ya estoy analizando cómo optimizar tus procesos con Agentes Autónomos. ¿Hablamos?";
-        const container = document.getElementById('chat-text');
+        const chatTexts = "Hola. Mientras exploras, ya estoy analizando cómo optimizar tus procesos con Agentes Autónomos. ¿Hablamos?";
+        const container = document.getElementById('chat-texts');
         let i = 0;
 
         function typeEffect() {
@@ -213,6 +543,19 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.querySelectorAll('.glass').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
+                // Creamos una propiedad CSS variable dinámicamente
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
 </body>
+
 </html>
